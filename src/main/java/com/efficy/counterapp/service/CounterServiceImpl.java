@@ -57,9 +57,11 @@ public class CounterServiceImpl implements CounterService {
      * @param counter
      */
     @Override
-    public synchronized Counter incrementCounter(Counter counter) {
-        counter.setValue(counter.getValue() + 1);
-        return counter;
+    public Counter incrementCounter(Counter counter) {
+        synchronized (counter) {
+            counter.setValue(counter.getValue() + 1);
+        }
+       return counter;
     }
 
     /**
